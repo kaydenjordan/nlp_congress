@@ -24,7 +24,7 @@ library(stringr)
 # example link
 # "https://www.govinfo.gov/metadata/pkg/CREC-2022-03-16/mods.xml"
 
-dates_pull <- seq(as.Date("2017-02-01"), as.Date("2017-03-01"), by="days")
+dates_pull <- seq(as.Date("2017-03-02"), as.Date("2017-04-01"), by="days")
 
 dates_list <- list()
 
@@ -177,7 +177,7 @@ where = df_full['where'].to_list()
 dates = df_full['date'].to_list()
 
 # looping variable
-i = 1426
+i = 0
 
 # for every link the year 
 for link in links[i:]:
