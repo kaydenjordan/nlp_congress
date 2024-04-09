@@ -24,7 +24,7 @@ library(stringr)
 # example link
 # "https://www.govinfo.gov/metadata/pkg/CREC-2022-03-16/mods.xml"
 
-dates_pull <- seq(as.Date("2017-07-02"), as.Date("2017-08-01"), by="days")
+dates_pull <- seq(as.Date("2017-08-02"), as.Date("2017-09-01"), by="days")
 
 dates_list <- list()
 
