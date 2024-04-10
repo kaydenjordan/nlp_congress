@@ -177,7 +177,7 @@ where = df_full['where'].to_list()
 dates = df_full['date'].to_list()
 
 # looping variable
-i = 121
+i = 0
 
 # for every link the year 
 for link in links[i:]:
