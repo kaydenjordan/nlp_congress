@@ -123,6 +123,11 @@ Good example of full House record: https://www.govinfo.gov/content/pkg/CREC-2024
 Good example of full Senate record: https://www.govinfo.gov/content/pkg/CREC-2024-01-08/pdf/CREC-2024-01-08-senate.pdf
  
 ```{python}
+def minimum(a, n):
+    # inbuilt function to find the position of minimum
+    minpos = a.index(min(a))
+    return [minpos, min(a)]
+
 # function to parse the data 
 def get_starts(text):
   # name examples 
@@ -167,7 +172,7 @@ def get_starts(text):
     # move on to next thingy
     return "None"
   else: 
-    min_index = min((i, x) for i, x in enumerate(re_list_start) if x != float('inf'))
+    min_index = minimum(re_list_start, len(re_list_start))
     start = re_list_start[min_index[0]]
     end = re_list_end[min_index[0]]
     name = text[start:end]
