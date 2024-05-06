@@ -24,7 +24,7 @@ library(stringr)
 # example link
 # "https://www.govinfo.gov/metadata/pkg/CREC-2022-03-16/mods.xml"
 
-dates_pull <- seq(as.Date("2017-01-01"), as.Date("2017-07-01"), by="days")
+dates_pull <- seq(as.Date("2017-01-05"), as.Date("2017-01-05"), by="days")
 
 dates_list <- list()
 
@@ -134,13 +134,13 @@ def get_starts(text):
   # Mr. SCHUMER. Ms. BALDWIN.
   re1 = re.search(r'M[a-z]*\.\s[A-Z]*\.', text)
   # Ms. GARCIA of Texas. Mr. GOOD of Virginia.
-  re2 = re.search(r'M[a-z]*\.\s[A-Z]*\sof\s[A-Z][a-z]*\.', text)
+  re2 = re.search(r'M[a-z]*\.\s[A-Z]*\sof\s[A-Z][a-z]*(\s[A-Z][a-z]*)?\.', text)
  
   # Ms. DeGETTE.
   # Mr. LaMALFA.
   # potentially MacCa something like that 
   re3 = re.search(r'M[a-z]*\.\s[A-Z]+[a-z]+[A-Z]+\.', text)
-  re4 = re.search(r'M[a-z]*\.\s[A-Z]+[a-z]+[A-Z]+\sof\s[A-Z][a-z]*\.', text)
+  re4 = re.search(r'M[a-z]*\.\s[A-Z]+[a-z]+[A-Z]+\sof\s[A-Z][a-z]*(\s[A-Z][a-z]*)?\.', text)
   
   # Ms. OCASIO-CORTEZ
   # Mr. D’ESPOSITO
@@ -148,7 +148,7 @@ def get_starts(text):
   # Ms. EDDIE BERNICE JOHNSON of Texas.
   # Ms. MAXINE WATERS of California.
   re5 = re.search(r"M[a-z]*\.\s[A-Z'’\-\s]*\.", text)
-  re6 = re.search(r"M[a-z]*\.\s[A-Z'’\-\s]*\sof\s[A-Z][a-z]*\.", text)
+  re6 = re.search(r"M[a-z]*\.\s[A-Z'’\-\s]*\sof\s[A-Z][a-z]*(\s[A-Z][a-z]*)?\.", text)
   
   ## DO NOT WANT - should be in there then we delete those files 
   # The CHAIR.
