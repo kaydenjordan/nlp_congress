@@ -24,7 +24,7 @@ library(stringr)
 # example link
 # "https://www.govinfo.gov/metadata/pkg/CREC-2022-03-16/mods.xml"
 
-dates_pull <- seq(as.Date("2017-01-01"), as.Date("2017-05-01"), by="days")
+dates_pull <- seq(as.Date("2017-01-01"), as.Date("2017-07-01"), by="days")
 
 dates_list <- list()
 
@@ -153,44 +153,26 @@ def get_starts(text):
   # The PRESIDING OFFICER (Mrs. Fischer).
   # The Acting CHAIR.
   # The ACTING PRESIDENT pro tempore.
-  re7 = re.search(r'The CHAIR[a-zA-Z\s]*\.|The SPEAKER[a-zA-Z\s]*\.|The (Presiding|PRESIDING) OFFICER[a-zA-Z\s\(]*\.|The (Acting|ACTING) CHAIR[a-zA-Z\s]*\.|The (Acting|ACTING) PRESIDENT[a-zA-Z\s]*\.', text)
-   
-   # figure out which is lowest 
-   re_list_start = [
-     re1.start() if re1 else float('inf'),
-     re2.start() if re2 else float('inf'),
-     re3.start() if re3 else float('inf'),
-     re4.start() if re4 else float('inf'),
-     re5.start() if re5 else float('inf'),
-     re6.start() if re6 else float('inf'),
-     re7.start() if re7 else float('inf'),
-     ]
-     
-    re_list_end = [
-     re1.end() if re1 else float('inf'),
-     re2.end() if re2 else float('inf'),
-     re3.end() if re3 else float('inf'),
-     re4.end() if re4 else float('inf'),
-     re5.end() if re5 else float('inf'),
-     re6.end() if re6 else float('inf'),
-     re7.end() if re7 else float('inf'),
-     ]
-     
-     re_list = [
-       re1, re2, re3, re4, re5, re6, re7
-       ]
+  re7 = re.search(r'The CHAIR[a-zA-Z\s]*\.|The SPEAKER[a-zA-Z\s]*\.|The (Presiding|PRESIDING) OFFICER[a-zA-Z\s\(]*\.|The (Acting|ACTING) CHAIR[a-zA-Z\s]*\.|The (Acting|ACTING) PRESIDENT[a-zA-Z\s]*\.|The PRESIDING OFFICER\.', text)
+  
+  # figure out which is lowest 
+  re_list_start = [re1.start() if re1 else float('inf'), re2.start() if re2 else float('inf'), re3.start() if re3 else float('inf'), re4.start() if re4 else float('inf'), re5.start() if re5 else float('inf'), re6.start() if re6 else float('inf'), re7.start() if re7 else float('inf')]
+  
+  re_list_end = [re1.end() if re1 else float('inf'), re2.end() if re2 else float('inf'), re3.end() if re3 else float('inf'), re4.end() if re4 else float('inf'), re5.end() if re5 else float('inf'), re6.end() if re6 else float('inf'), re7.end() if re7 else float('inf') ]
+  
+  re_list = [re1, re2, re3, re4, re5, re6, re7]
     
-    # as long as they aren't all infinity 
-    if all(x == float('inf') for x in re_list_start):
-      # move on to next thingy
-      return "None"
-    else: 
-      min_index = min((i, x) for i, x in enumerate(re_list_start) if x != float('inf'))
-      start = re_list_start[min_index[0]]
-      end = re_list_end[min_index[0]]
-      name = text[start:end]
-      new_text = text[end:]
-      return [name, new_text, re_list[min_index[0]]]
+  # as long as they aren't all infinity 
+  if all(x == float('inf') for x in re_list_start):
+    # move on to next thingy
+    return "None"
+  else: 
+    min_index = min((i, x) for i, x in enumerate(re_list_start) if x != float('inf'))
+    start = re_list_start[min_index[0]]
+    end = re_list_end[min_index[0]]
+    name = text[start:end]
+    new_text = text[end:]
+    return [name, new_text, re_list[min_index[0]]]
  
 ```
 
@@ -204,7 +186,7 @@ where = df_full['where'].to_list()
 dates = df_full['date'].to_list()
 
 # looping variable
-i = 0 # 2662
+i = 735 # 2662
 
 # for every link the year 
 for link in links[i:]:
