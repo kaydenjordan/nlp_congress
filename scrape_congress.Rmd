@@ -24,7 +24,7 @@ library(stringr)
 # example link
 # "https://www.govinfo.gov/metadata/pkg/CREC-2022-03-16/mods.xml"
 
-dates_pull <- seq(as.Date("2017-01-05"), as.Date("2017-01-05"), by="days")
+dates_pull <- seq(as.Date("2018-01-01"), as.Date("2018-12-31"), by="days")
 
 dates_list <- list()
 
@@ -185,31 +185,30 @@ def get_starts(text):
 # get the data
 df_full = r.df_full
 
-temp = df_full[df_full['where'] == "House"]
-temp = temp[temp['date'] == "2017-01-05"]
-temp = temp.reset_index()
-
+# temp = df_full[df_full['where'] == "House"]
+# temp = temp[temp['date'] == "2017-01-05"]
+# temp = temp.reset_index()
 
 # get the information you need as a list
 links = df_full['part'].to_list()
 where = df_full['where'].to_list()
 dates = df_full['date'].to_list()
 
-links = temp['part'].to_list()
-where = temp['where'].to_list()
-dates = temp['date'].to_list()
+# links = temp['part'].to_list()
+# where = temp['where'].to_list()
+# dates = temp['date'].to_list()
 ```
 
 ```{python}
 # looping variable
-i = 1 # 2662
+i = 1 
 
 # for every link the year 
 for link in links[i: ]:
   
   # get the text for that link 
   texts = get_text(link)
-  print(texts)
+  #print(texts)
   #print("__\n")
   
   # then we would loop over each text  
@@ -234,12 +233,12 @@ for link in links[i: ]:
     # if no other stuff then save the shit 
     if try_two == 'None': 
       # append if they keep yapping 
-      f = open(try_one[0] + where[i] + "." + dates[i] + '.txt', "a")  
+      f = open("temp/" + try_one[0] + where[i] + "." + dates[i] + '.txt', "a")  
       f.write(try_one[1])
       f.close()
       break 
     else: 
-      f = open(try_one[0] + where[i] + "." + dates[i] + '.txt', "a") 
+      f = open("temp/" + try_one[0] + where[i] + "." + dates[i] + '.txt', "a") 
       # only print to the start of the next one
       f.write(try_one[1][:try_two[2].start()])
       # be sure to use start so you get the next name 
