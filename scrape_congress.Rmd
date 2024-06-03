@@ -201,7 +201,7 @@ dates = df_full['date'].to_list()
 
 ```{python}
 # looping variable
-i = 1
+i = 3387
 
 # for every link the year 
 for link in links[i: ]:
