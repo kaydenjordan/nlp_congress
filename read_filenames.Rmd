@@ -1,0 +1,52 @@
+---
+title: "Grab File Names"
+author: "Erin Buchanan"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Libraries
+
+```{r}
+library(dplyr)
+library(tidyr)
+```
+
+## Data
+
+```{r}
+filenames <- list.files(path = ".",
+                        pattern = "*.txt",
+                        recursive = TRUE,
+                        full.names = FALSE)
+
+filenames <- as.data.frame(filenames)
+```
+
+## Cleanup
+
+```{r}
+fileDF <- filenames %>% 
+  rename(file_name = filenames) %>% 
+  separate_wider_delim(data = .,
+                       cols = file_name,
+                       delim  = "/",
+                       names = c("year", "rest")) %>% 
+  mutate(rest = gsub(".txt", "", rest)) %>% 
+  separate_wider_delim(data = .,
+                       cols = rest,
+                       delim  = ".",
+                       names = c("title", "name", "where", "date"),
+                       too_few = "align_start") %>% 
+  separate_wider_delim(data = .,
+                     cols = name,
+                     delim  = " of ",
+                     names = c("name", "state"),
+                     too_few = "align_start") %>% 
+  write.csv(., file = "congress_files.csv", row.names = F)
+  
+```
